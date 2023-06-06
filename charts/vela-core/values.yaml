@@ -5,7 +5,7 @@
 ## @section KubeVela core parameters
 
 ## @param systemDefinitionNamespace System definition namespace, if unspecified, will use built-in variable `.Release.Namespace`.
-systemDefinitionNamespace:
+systemDefinitionNamespace: xiaowang-test
 
 ## @param applicationRevisionLimit Application revision limit
 applicationRevisionLimit: 2
@@ -57,9 +57,9 @@ imageRegistry: ""
 ## @param image.tag Image tag
 ## @param image.pullPolicy Image pull policy
 image:
-  repository: oamdev/vela-core
+  repository: vela-core
   tag: latest
-  pullPolicy: Always
+  pullPolicy: IfNotPresent
 
 ## @param resources.limits.cpu KubeVela controller's cpu limit
 ## @param resources.limits.memory KubeVela controller's memory limit
@@ -82,21 +82,6 @@ webhookService:
 ## @param healthCheck.port KubeVela health check port
 healthCheck:
   port: 9440
-
-## @skip readinessProbe
-readinessProbe:
-  failureThreshold: 3
-  initialDelaySeconds: 30
-  periodSeconds: 5
-  successThreshold: 1
-  timeoutSeconds: 1
-## @skip livenessProbe
-livenessProbe:
-  failureThreshold: 3
-  initialDelaySeconds: 90
-  periodSeconds: 5
-  successThreshold: 1
-  timeoutSeconds: 1
 
 ## @section KubeVela controller optimization parameters
 ##@param optimize.cachedGvks Optimize types of resources to be cached.
@@ -164,7 +149,7 @@ featureGates:
 ## @param multicluster.clusterGateway.secureTLS.certPath Path to the certificate file
 ## @param multicluster.clusterGateway.secureTLS.certManager.enabled Whether to enable cert-manager
 multicluster:
-  enabled: true
+  enabled: false
   metrics:
     enabled: false
   clusterGateway:
@@ -262,7 +247,7 @@ logFileMaxSize: 1024
 
 ## @skip admissionWebhooks
 admissionWebhooks:
-  enabled: true
+  enabled: false
   failurePolicy: Fail
   certificate:
     mountPath: /etc/k8s-webhook-certs
@@ -293,7 +278,7 @@ kubeClient:
 ## @param authentication.groupPattern Application authentication will impersonate as the request Group that matches the pattern
 authentication:
   enabled: false
-  withUser: true
+  withUser: false
   defaultUser: kubevela:vela-core
   groupPattern: kubevela:*
 
